@@ -240,10 +240,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </option>
                         <?php endforeach; ?>
                     </select>
+                    <p style="font-size: 11px; color: var(--text-muted); margin-top: 5px;">Escolha uma categoria já criada acima.</p>
                 </div>
                 <div class="form-group">
-                    <label for="new_category">Ou Criar Nova</label>
-                    <input type="text" id="new_category" name="new_category" placeholder="Nova categoria..." class="form-control" autocomplete="off">
+                    <label for="new_category" style="color: var(--primary);">Ou Criar Nova</label>
+                    <input type="text" id="new_category" name="new_category" placeholder="Nome da nova categoria..." class="form-control" autocomplete="off" style="border-color: var(--primary-light);">
+                    <p style="font-size: 11px; color: var(--primary); margin-top: 5px; font-weight: 600;">⚠️ Se preenchido, este campo ignora a seleção ao lado.</p>
                 </div>
             </div>
 
@@ -261,8 +263,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <div class="form-group">
-                <label for="image">Imagem de Capa</label>
+                <label for="image">Imagem de Capa (Header)</label>
+                <?php if (!empty($post['image_path'])): ?>
+                    <div style="margin-bottom: 15px; background: #f9fafb; padding: 10px; border-radius: 8px; border: 1px solid var(--border-light); display: inline-block;">
+                        <p style="font-size: 12px; margin-bottom: 8px; color: var(--text-muted);">Imagem atual:</p>
+                        <img src="../<?= htmlspecialchars($post['image_path']) ?>" alt="Capa" style="height: 80px; width: auto; border-radius: 6px; display: block; box-shadow: var(--shadow-sm);">
+                    </div>
+                <?php endif; ?>
                 <input type="file" id="image" name="image" class="form-control" accept="image/*">
+                <p style="font-size: 11px; color: var(--text-muted); margin-top: 5px;">Recomendado: 1200x600px. O sistema otimiza para WebP automaticamente.</p>
             </div>
 
             <div class="form-group">
