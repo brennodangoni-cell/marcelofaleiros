@@ -128,13 +128,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         align-items: start;
     }
 
-    @media (min-width: 1400px) {
+    @media (min-width: 1300px) {
         .editor-grid {
-            grid-template-columns: 1fr 600px;
+            grid-template-columns: 1fr 550px;
         }
     }
 
-    @media (max-width: 1100px) {
+    @media (max-width: 1000px) {
         .editor-grid {
             grid-template-columns: 1fr;
         }
