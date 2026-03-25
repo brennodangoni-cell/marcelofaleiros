@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Mensagem de Contato</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #1a1a1a;">
+    <table width="100%" cellpadding="0" cellspacing="0" style="background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #2d2d2d 100%); padding: 40px 20px;">
+        <tr>
+            <td align="center">
+                <table width="600" cellpadding="0" cellspacing="0" style="background-color: rgba(26, 26, 26, 0.95); border-radius: 20px; border: 1px solid rgba(126, 217, 87, 0.2); overflow: hidden; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);">
+                    
+                    <!-- Header -->
+                    <tr>
+                        <td style="background: rgba(126, 217, 87, 0.1); padding: 30px; text-align: center; border-bottom: 2px solid rgba(126, 217, 87, 0.3);">
+                            <h1 style="color: #7ed957; font-family: 'Playfair Display', 'Merriweather', serif; font-size: 28px; font-weight: 700; margin: 0; letter-spacing: -0.02em;">
+                                Nova Mensagem de Contato
+                            </h1>
+                            <p style="color: #cccccc; font-size: 14px; margin: 10px 0 0 0; opacity: 0.8;">
+                                Dr. Marcelo Faleiros - Psicoterapeuta
+                            </p>
+                        </td>
+                    </tr>
+                    
+                    <!-- Content -->
+                    <tr>
+                        <td style="padding: 40px;">
+                            
+                            <!-- Greeting -->
+                            <p style="color: #ffffff; font-size: 16px; line-height: 1.7; margin: 0 0 30px 0;">
+                                Olá,<br><br>
+                                Você recebeu uma nova mensagem através do formulário de contato do seu site:
+                            </p>
+                            
+                            <!-- Info Box -->
+                            <table width="100%" cellpadding="0" cellspacing="0" style="background: rgba(0, 0, 0, 0.4); border-left: 4px solid #7ed957; border-radius: 8px; margin: 30px 0; padding: 25px;">
+                                <tr>
+                                    <td>
+                                        <table width="100%" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td style="padding: 12px 0; border-bottom: 1px solid rgba(126, 217, 87, 0.1);">
+                                                    <span style="color: #7ed957; font-weight: 600; font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em;">Nome:</span>
+                                                    <p style="color: #ffffff; font-size: 16px; margin: 8px 0 0 0; font-weight: 500;">{{from_name}}</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 12px 0; border-bottom: 1px solid rgba(126, 217, 87, 0.1);">
+                                                    <span style="color: #7ed957; font-weight: 600; font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em;">E-mail:</span>
+                                                    <p style="color: #ffffff; font-size: 16px; margin: 8px 0 0 0;">
+                                                        <a href="mailto:{{from_email}}" style="color: #7ed957; text-decoration: none;">{{from_email}}</a>
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 12px 0; border-bottom: 1px solid rgba(126, 217, 87, 0.1);">
+                                                    <span style="color: #7ed957; font-weight: 600; font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em;">Telefone/WhatsApp:</span>
+                                                    <p style="color: #ffffff; font-size: 16px; margin: 8px 0 0 0;">
+                                                        <a href="https://wa.me/55{{phone}}" style="color: #7ed957; text-decoration: none;">{{phone}}</a>
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 12px 0;">
+                                                    <span style="color: #7ed957; font-weight: 600; font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em;">Mensagem:</span>
+                                                    <p style="color: #cccccc; font-size: 15px; margin: 12px 0 0 0; line-height: 1.8; white-space: pre-wrap; font-style: italic;">{{message}}</p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <!-- Action Buttons -->
+                            <table width="100%" cellpadding="0" cellspacing="0" style="margin: 30px 0;">
+                                <tr>
+                                    <td align="center">
+                                        <table cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td style="background-color: #5cb83d; border-radius: 50px; padding: 14px 35px;">
+                                                    <a href="mailto:{{from_email}}?subject=Re: Sua mensagem de contato" style="color: #ffffff; text-decoration: none; font-weight: 600; font-size: 15px; display: inline-block;">
+                                                        Responder por E-mail
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" style="padding-top: 15px;">
+                                        <table cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td style="background-color: rgba(37, 211, 102, 0.2); border: 1px solid rgba(37, 211, 102, 0.4); border-radius: 50px; padding: 14px 35px;">
+                                                    <a href="https://wa.me/55{{phone}}?text=Olá {{from_name}}, obrigado por entrar em contato!" style="color: #25D366; text-decoration: none; font-weight: 600; font-size: 15px; display: inline-block;">
+                                                        Responder no WhatsApp
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <!-- Footer -->
+                            <p style="color: #cccccc; font-size: 12px; line-height: 1.6; margin: 40px 0 0 0; padding-top: 30px; border-top: 1px solid rgba(126, 217, 87, 0.1); text-align: center; opacity: 0.7;">
+                                Esta mensagem foi enviada automaticamente através do formulário de contato do site.<br>
+                                <span style="color: #7ed957;">Dr. Marcelo Faleiros - Psicoterapeuta</span>
+                            </p>
+                            
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
