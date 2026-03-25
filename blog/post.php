@@ -449,10 +449,6 @@ $relatedPosts = $relatedStmt->fetchAll(PDO::FETCH_ASSOC);
             <h1 class="article-title"><?= htmlspecialchars($post['title']) ?></h1>
             <div class="article-meta">
                 <span><i class="far fa-calendar-alt"></i> <?= date('d/m/Y', strtotime($post['created_at'])) ?></span>
-                <span style="margin: 0 10px;">&bull;</span>
-                <span><i class="far fa-clock"></i> <?= $readingTime ?> min de leitura</span>
-                <span style="margin: 0 10px;">&bull;</span>
-                <span><i class="far fa-eye"></i> <?= $post['views'] ?> visualizações</span>
             </div>
         </div>
 
@@ -487,7 +483,8 @@ $relatedPosts = $relatedStmt->fetchAll(PDO::FETCH_ASSOC);
                                 <img src="../<?= htmlspecialchars($rel['image_path']) ?>"
                                     alt="<?= htmlspecialchars($rel['title']) ?>">
                             <?php else: ?>
-                                <div style="width:100%; height:140px; background:#18181b; display:flex; align-items:center; justify-content:center; border-bottom:1px solid var(--color-border);">
+                                <div
+                                    style="width:100%; height:140px; background:#18181b; display:flex; align-items:center; justify-content:center; border-bottom:1px solid var(--color-border);">
                                     <i class="fas fa-image fa-2x" style="color:#3f3f46;"></i>
                                 </div>
                             <?php endif; ?>
