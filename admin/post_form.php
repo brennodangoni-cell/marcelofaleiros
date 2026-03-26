@@ -1,8 +1,7 @@
 <?php
 require_once __DIR__ . '/../includes/db.php';
-require_once __DIR__ . '/header.php';
 
-$id = isset($_GET['id']) ? (int)$_GET['id'] : null;
+$id = isset($_GET['id']) ? (int) $_GET['id'] : null;
 $post = null;
 $error = '';
 
@@ -21,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $excerpt = trim($_POST['excerpt'] ?? '');
     $content = $_POST['content'] ?? '';
     $status = $_POST['status'] ?? 'published';
-    $category_id = empty($_POST['category_id']) ? null : (int)$_POST['category_id'];
+    $category_id = empty($_POST['category_id']) ? null : (int) $_POST['category_id'];
     $new_category = trim($_POST['new_category'] ?? '');
     $image_path = $post['image_path'] ?? null;
 
@@ -44,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $tmpName = $_FILES['image']['tmp_name'];
         $fileName = basename($_FILES['image']['name']);
         $fileType = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-        
+
         if (in_array($fileType, ['jpg', 'jpeg', 'png', 'webp', 'gif'])) {
             $newName = uniqid() . '.webp';
             $uploadPath = __DIR__ . '/../uploads/' . $newName;
@@ -55,7 +54,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             $image = null;
-            if ($fileType === 'jpg' || $fileType === 'jpeg') { $image = @imagecreatefromjpeg($tmpName);
+            if ($fileType === 'jpg' || $fileType === 'jpeg') {
+                $image = @imagecreatefromjpeg($tmpName);
             } elseif ($fileType === 'png') {
                 $image = @imagecreatefrompng($tmpName);
                 if ($image !== false) {
@@ -63,8 +63,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     imagealphablending($image, true);
                     imagesavealpha($image, true);
                 }
-            } elseif ($fileType === 'webp') { $image = @imagecreatefromwebp($tmpName);
-            } elseif ($fileType === 'gif') { $image = @imagecreatefromgif($tmpName); }
+            } elseif ($fileType === 'webp') {
+                $image = @imagecreatefromwebp($tmpName);
+            } elseif ($fileType === 'gif') {
+                $image = @imagecreatefromgif($tmpName);
+            }
 
             if ($image !== false) {
                 $width = imagesx($image);
@@ -102,7 +105,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $slug = createSlug($title);
         $slugCheck = $pdo->prepare("SELECT id FROM posts WHERE slug = ? AND id != ?");
         $slugCheck->execute([$slug, $id ?? 0]);
-        if ($slugCheck->fetch()) { $slug .= '-' . uniqid(); }
+        if ($slugCheck->fetch()) {
+            $slug .= '-' . uniqid();
+        }
 
         try {
             if ($id) {
@@ -114,9 +119,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             header('Location: index.php');
             exit;
-        } catch (PDOException $e) { $error = "Erro ao salvar postagem: " . $e->getMessage(); }
+        } catch (PDOException $e) {
+            $error = "Erro ao salvar postagem: " . $e->getMessage();
+        }
     }
 }
+
+require_once __DIR__ . '/header.php';
 ?>
 
 <style>
@@ -218,9 +227,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h2><?= $id ? 'Editar' : 'Nova' ?> Postagem</h2>
         
         <?php if ($error): ?>
-            <div style="background: var(--danger-light); color: var(--danger); padding: 15px; border-radius: 8px; margin-bottom: 20px; font-weight: 500;">
-                <i class="fas fa-exclamation-triangle"></i> <?= htmlspecialchars($error) ?>
-            </div>
+                <div style="background: var(--danger-light); color: var(--danger); padding: 15px; border-radius: 8px; margin-bottom: 20px; font-weight: 500;">
+                    <i class="fas fa-exclamation-triangle"></i> <?= htmlspecialchars($error) ?>
+                </div>
         <?php endif; ?>
 
         <form method="POST" action="" enctype="multipart/form-data" id="postForm">
@@ -235,9 +244,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <select id="category_id" name="category_id" class="form-control">
                         <option value="">Nenhuma / Sem categoria</option>
                         <?php foreach ($categories as $cat): ?>
-                            <option value="<?= $cat['id'] ?>" <?= ($post['category_id'] ?? '') == $cat['id'] ? 'selected' : '' ?>>
-                                <?= htmlspecialchars($cat['name']) ?>
-                            </option>
+                                <option value="<?= $cat['id'] ?>" <?= ($post['category_id'] ?? '') == $cat['id'] ? 'selected' : '' ?>>
+                                    <?= htmlspecialchars($cat['name']) ?>
+                                </option>
                         <?php endforeach; ?>
                     </select>
                     <p style="font-size: 11px; color: var(--text-muted); margin-top: 5px;">Escolha uma categoria já criada acima.</p>
@@ -265,10 +274,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="form-group">
                 <label for="image">Imagem de Capa (Header)</label>
                 <?php if (!empty($post['image_path'])): ?>
-                    <div style="margin-bottom: 15px; background: #f9fafb; padding: 10px; border-radius: 8px; border: 1px solid var(--border-light); display: inline-block;">
-                        <p style="font-size: 12px; margin-bottom: 8px; color: var(--text-muted);">Imagem atual:</p>
-                        <img src="../<?= htmlspecialchars($post['image_path']) ?>" alt="Capa" style="height: 80px; width: auto; border-radius: 6px; display: block; box-shadow: var(--shadow-sm);">
-                    </div>
+                        <div style="margin-bottom: 15px; background: #f9fafb; padding: 10px; border-radius: 8px; border: 1px solid var(--border-light); display: inline-block;">
+                            <p style="font-size: 12px; margin-bottom: 8px; color: var(--text-muted);">Imagem atual:</p>
+                            <img src="../<?= htmlspecialchars($post['image_path']) ?>" alt="Capa" style="height: 80px; width: auto; border-radius: 6px; display: block; box-shadow: var(--shadow-sm);">
+                        </div>
                 <?php endif; ?>
                 <input type="file" id="image" name="image" class="form-control" accept="image/*">
                 <p style="font-size: 11px; color: var(--text-muted); margin-top: 5px;">Recomendado: 1200x600px. O sistema otimiza para WebP automaticamente.</p>
